@@ -98,10 +98,12 @@ export const getSimilarPosts = async (categories, slug) => {
       where: { slug_not: $slug, AND: {categories_some: {slug_in: $categories}}}
       last: 3
       )
+      {
       title
       featuredImage{url}
       createdAt
       slug
+    }
   }
   `
   const result = await request(graphqlAPI, query, {categories, slug});
